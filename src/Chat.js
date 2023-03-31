@@ -19,8 +19,9 @@ function Chat() {
         console.log(value)
     }
     function handleclick() {
-        const newMessage = { text: value, position: messages.length % 2 === 0 ? 'left' : 'right' };
-        setMessages([...messages, newMessage]);
+        // const newMessage = { text: value, position: messages.length % 2 === 0 ? 'left' : 'right' };
+        setMessages([...messages, value]);
+        console.log(messages)
         setvalue('');
       }
 
@@ -61,25 +62,32 @@ function Chat() {
          </div> */}
            <div className='msgbox'>
 
-          {messages.map((message, index) => (
+          {/* {messages.map((message, index) => (
             <div className={`msg ${message.position}`} key={index}>
-            <p>{message.text}</p>
+            <p className='msg-text'>{message.text}</p>
+            </div>
+          ))} */}
+          {messages.map((message, index) => (
+            <div className={index%2==0?' msg msgright':'msg msgleft'} key={index}>
+           <div className='msg-text'> <p >{message}</p></div>
             </div>
           ))}
         </div>
 
          <div className='inputbox'>
             <div className='inputmsg'>
-            <SentimentVerySatisfiedIcon></SentimentVerySatisfiedIcon>
+            <div style={{display:'flex', alignItems:'center'}}>
+              <SentimentVerySatisfiedIcon></SentimentVerySatisfiedIcon>
             {/* input */}
             <input type="text" value={value} onChange={handlechange} />
+            </div>
             <div className='input-icons'>
             <AttachFileIcon></AttachFileIcon>
             <CurrencyRupeeIcon></CurrencyRupeeIcon>
             <CameraAltIcon></CameraAltIcon>
             </div>
             </div>
-            <div className='mic' onClick={handleclick}><SendIcon/></div>
+            <div className='send' onClick={handleclick}><SendIcon/></div>
          </div>
 
         </div>
